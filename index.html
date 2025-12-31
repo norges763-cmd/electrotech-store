@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>ElectroTech Store</title>
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --accent: #2ecc71;
+            --whatsapp: #25d366;
+            --bg: #f8f9fa;
+            --danger: #e74c3c;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            background: var(--bg); 
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        header { 
+            background: var(--primary); color: white; padding: 25px 15px; 
+            text-align: center; position: sticky; top: 0; z-index: 1000;
+        }
+
+        .filtros { display: flex; overflow-x: auto; gap: 10px; padding: 20px 15px; scrollbar-width: none; }
+        .filtros::-webkit-scrollbar { display: none; }
+        
+        .btn-filtro { 
+            padding: 10px 22px; border: 1.5px solid var(--primary); border-radius: 25px; 
+            background: white; white-space: nowrap; font-weight: bold; font-size: 14px; cursor: pointer;
+        }
+        .btn-filtro.activo { background: var(--primary); color: white; }
+
+        .tienda { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
+        
+        .producto { 
+            background: white; border-radius: 15px; padding: 15px; text-align: center; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; flex-direction: column; justify-content: space-between;
+        }
+
+        .img-container { width: 100%; height: 130px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; overflow: hidden; }
+        .img-container img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; cursor: pointer; transition: transform 0.2s; }
+
+        h3 { font-size: 15px; margin: 10px 0 5px 0; color: #333; height: 40px; overflow: hidden; }
+        .precio { font-size: 16px; color: var(--accent); font-weight: bold; margin-bottom: 12px; display: block; }
+        
+        .btn-whatsapp { 
+            background: var(--whatsapp); color: white; text-decoration: none; 
+            padding: 10px; border-radius: 10px; font-size: 13px; font-weight: bold; display: block;
+        }
+
+        .btn-agotado {
+            background: var(--danger); color: white; border: none;
+            padding: 10px; border-radius: 10px; font-size: 13px; font-weight: bold;
+            opacity: 0.9; width: 100%;
+        }
+
+        /* Modal Mejorado */
+        .modal {
+            display: none; position: fixed; z-index: 9999; top: 0; left: 0; 
+            width: 100%; height: 100%; background: rgba(0,0,0,0.95);
+            justify-content: center; align-items: center;
+        }
+        .modal img { max-width: 95%; max-height: 90%; object-fit: contain; }
+        .btn-cerrar {
+            position: absolute; top: 30px; right: 30px; color: white;
+            font-size: 40px; font-weight: bold; cursor: pointer; background: rgba(255,255,255,0.1);
+            width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h2 style="margin:0;">ElectroTech Store</h2>
+    <p style="margin: 5px 0 0 0; font-size: 13px; opacity: 0.8;">Cables y Almacenamiento</p>
+</header>
+
+<div class="filtros">
+    <button class="btn-filtro activo" onclick="filtrar('todos', this)">Todos</button>
+    <button class="btn-filtro" onclick="filtrar('conectividad', this)">Accesorios para teléfonos</button>
+    <button class="btn-filtro" onclick="filtrar('almacenamiento', this)">Almacenamiento</button>
+</div>
+
+<div id="miModal" class="modal" onclick="this.style.display='none'">
+    <span class="btn-cerrar">&times;</span>
+    <img id="imgAmpliada">
+</div>
+
+<div class="tienda">
+
+    <div class="producto conectividad">
+        <div class="img-container">
+            <img src="https://i.ibb.co/KjY3KDTV/Lumii-20251209-160415678.jpg" onclick="ampliar(this.src)" alt="Cargadores">
+        </div>
+        <h3>Cargadores</h3>
+        <span class="precio">$1800 CUP</span>
+        <a href="https://wa.me/5358811896?text=Me+interesa+el+Cargador+de+$1800+CUP" class="btn-whatsapp">WhatsApp</a>
+    </div>
+
+    <div class="producto conectividad">
+        <div class="img-container">
+            <img src="https://i.ibb.co/PsBRYb20/1000218217.jpg" onclick="ampliar(this.src)" alt="Cargadores">
+        </div>
+        <h3>Cargadores</h3>
+        <span class="precio">$750 CUP</span>
+        <a href="https://wa.me/5358811896?text=Me+interesa+el+Cargador+de+$750+CUP" class="btn-whatsapp">WhatsApp</a>
+    </div>
+    
+    <div class="producto conectividad">
+        <div class="img-container">
+            <img src="https://i.ibb.co/C3B0YzFm/Lumii-20251209-115131565.jpg" onclick="ampliar(this.src)" alt="Cables C a C">
+        </div>
+        <h3>Cable Tipo C a Tipo C</h3>
+        <span class="precio">$580 CUP</span>
+        <a href="https://wa.me/5358811896?text=Me+interesa+el+Cable+Tipo+C+a+Tipo+C+de+$580+CUP" class="btn-whatsapp">WhatsApp</a>
+    </div>
+
+    <div class="producto conectividad">
+        <div class="img-container">
+            <img src="https://i.ibb.co/23FmktSZ/1000217879.jpg" onclick="ampliar(this.src)" alt="Cable Tipo C">
+        </div>
+        <h3>Cable Tipo C a USB</h3>
+        <span class="precio">$480 CUP</span>
+        <a href="https://wa.me/5358811896?text=Me+interesa+el+Cable+Tipo+C+a+USB+de+$480+CUP" class="btn-whatsapp">WhatsApp</a>
+    </div>
+
+    <div class="producto conectividad">
+        <div class="img-container">
+            <img src="https://i.ibb.co/HpdRBhm1/1000218191.jpg" onclick="ampliar(this.src)" alt="Cable tipo B">
+        </div>
+        <h3>Cable tipo B</h3>
+        <span class="precio">$700 CUP</span>
+        <a href="https://wa.me/5358811896?text=Me+interesa+el+Cable+tipo+B+de+$700+CUP" class="btn-whatsapp">WhatsApp</a>
+    </div>
+
+    <div class="producto conectividad">
+        <div class="img-container">
+            <img src="https://i.ibb.co/Ng76BvzN/Lumii-20251004-131401596.jpg" onclick="ampliar(this.src)" alt="OTG Tipo C">
+        </div>
+        <h3>OTG Tipo C</h3>
+        <span class="precio">$210 CUP</span>
+        <a href="https://wa.me/5358811896?text=Me+interesa+el+OTG+Tipo+C+de+$210+CUP" class="btn-whatsapp">WhatsApp</a>
+    </div>
+
+    <div class="producto conectividad">
+        <div class="img-container">
+            <img src="https://i.ibb.co/SD0SWwyx/OTG-Tipo-B.jpg" onclick="ampliar(this.src)" alt="OTG Tipo B">
+        </div>
+        <h3>OTG Tipo B (Micro)</h3>
+        <span class="precio">$300 CUP</span>
+        <a href="https://wa.me/5358811896?text=Me+interesa+el+OTG+Tipo+B+(Micro)+de+$300+CUP" class="btn-whatsapp">WhatsApp</a>
+    </div>
+
+    <div class="producto conectividad">
+        <div class="img-container">
+            <img src="https://i.ibb.co/gMqH6nfn/Lumii-20250921-192528087.jpg" onclick="ampliar(this.src)" alt="MicroSD">
+        </div>
+        <h3>Micro SD 64GB</h3>
+        <span class="precio">$2400 CUP</span>
+        <a href="https://wa.me/5358811896?text=Me+interesa+la+Micro+SD+64GB+de+$2400+CUP" class="btn-whatsapp">WhatsApp</a>
+    </div>
+
+    <div class="producto almacenamiento">
+        <div class="img-container">
+            <img src="https://i.ibb.co/6cnpqPTr/1000218192.jpg" onclick="ampliar(this.src)" alt="Memorias USB 32gb">
+        </div>
+        <h3>Memorias USB 32GB</h3>
+        <span class="precio">$2000 CUP</span>
+        <a href="https://wa.me/5358811896?text=Me+interesa+la+Memoria+USB+32GB+de+$2000+CUP" class="btn-whatsapp">WhatsApp</a>
+    </div>
+
+    <div class="producto almacenamiento">
+        <div class="img-container">
+            <img src="https://i.ibb.co/HfH5N9nT/1000190920.jpg" onclick="ampliar(this.src)" alt="Discos duros">
+        </div>
+        <h3>Discos duros</h3>
+        <div style="height: 16px; margin-bottom: 12px;"></div>
+        <button class="btn-agotado">Agotado</button>
+    </div>
+
+</div>
+
+<script>
+    function ampliar(src) {
+        document.getElementById("imgAmpliada").src = src;
+        document.getElementById("miModal").style.display = "flex";
+    }
+
+    function filtrar(categoria, boton) {
+        const botones = document.querySelectorAll('.btn-filtro');
+        botones.forEach(b => b.classList.remove('activo'));
+        boton.classList.add('activo');
+        
+        const productos = document.querySelectorAll('.producto');
+        productos.forEach(p => {
+            if (categoria === 'todos' || p.classList.contains(categoria)) {
+                p.style.display = 'flex';
+            } else {
+                p.style.display = 'none';
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
