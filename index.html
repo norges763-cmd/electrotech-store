@@ -23,10 +23,11 @@
         .btn-filtro { padding: 10px 22px; border: 1.5px solid var(--primary); border-radius: 25px; background: white; white-space: nowrap; font-weight: bold; font-size: 14px; cursor: pointer; }
         .btn-filtro.activo { background: var(--primary); color: white; }
 
+        /* Ajuste para que las imágenes no se descontrolen */
         .tienda { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
         .producto { background: white; border-radius: 15px; padding: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; flex-direction: column; justify-content: space-between; }
 
-        .img-container { width: 100%; height: 130px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative; }
+        .img-container { width: 100%; height: 130px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative; overflow: hidden; }
         .img-container img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; cursor: pointer; }
         
         .badge-fotos { position: absolute; bottom: 5px; right: 5px; background: rgba(0,0,0,0.7); color: white; font-size: 10px; padding: 3px 8px; border-radius: 10px; font-weight: bold; pointer-events: none; }
@@ -40,9 +41,8 @@
 
         .modal { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); flex-direction: column; justify-content: center; align-items: center; }
         .carrusel-container { width: 100%; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
-        .carrusel-container::-webkit-scrollbar { display: none; }
-        .carrusel-item { min-width: 100%; width: 100%; display: flex; justify-content: center; align-items: center; scroll-snap-align: center; scroll-snap-stop: always; }
-        .carrusel-item img { max-width: 95%; max-height: 75vh; object-fit: contain; pointer-events: none; }
+        .carrusel-item { min-width: 100%; width: 100%; display: flex; justify-content: center; align-items: center; scroll-snap-align: center; }
+        .carrusel-item img { max-width: 95%; max-height: 75vh; object-fit: contain; }
         
         .modal-text { color: white; padding: 25px; text-align: center; max-width: 85%; }
         .modal-text h2 { color: var(--accent); margin-top: 0; margin-bottom: 15px; }
@@ -153,7 +153,7 @@
             <img src="https://i.ibb.co/Ngj3BB8w/1000159173.jpg">
         </div>
         <h3>Memorias USB 64gb 3.0</h3>
-        <div style="height: 16px; margin-bottom: 12px;"></div>
+        <span class="precio">---</span>
         <button class="btn-descripcion" onclick="verDescripcion('Memorias USB 64gb 3.0', 'Memorias USB 3.0 copia ultra rapida. <br><br> *Nota importante: la mayoria de las cajitas decodificadoras no reconocen memorias de 64gb')">Ver detalles</button>
         <button class="btn-agotado">Agotado</button>
     </div>
@@ -163,7 +163,7 @@
             <img src="https://i.ibb.co/HfH5N9nT/1000190920.jpg">
         </div>
         <h3>Discos duros</h3>
-        <div style="height: 16px; margin-bottom: 12px;"></div>
+        <span class="precio">---</span>
         <button class="btn-descripcion" onclick="verDescripcion('Discos duros', '')">Ver detalles</button>
         <button class="btn-agotado">Agotado</button>
     </div>
@@ -181,7 +181,7 @@
             div.innerHTML = `<img src="${foto}">`;
             carrusel.appendChild(div);
         });
-        instruccion.style.display = "block";
+        instruccion.style.display = (listaFotos.length > 1) ? "block" : "none";
         document.getElementById("miModal").style.display = "flex";
         carrusel.scrollLeft = 0;
     }
@@ -216,4 +216,3 @@
 
 </body>
 </html>
-
