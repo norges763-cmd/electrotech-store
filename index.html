@@ -100,7 +100,7 @@
         </div>
         <h3>OTG Tipo C</h3>
         <span class="precio">$210 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('OTG Tipo C', '*Nota importante: No todas las memorias USB salen en los telefonos. Por favor, verifique su memoria USB antes de hacer la compra')">Ver detalles</button>
+        <button class="btn-descripcion" onclick="verDescripcion('OTG Tipo C', '')">Ver detalles</button>
         <a href="https://wa.me/5358811896?text=Me+interesa+el+OTG+Tipo+C+de+$210+CUP" class="btn-whatsapp">WhatsApp</a>
     </div>
 
@@ -111,7 +111,7 @@
         </div>
         <h3>OTG Tipo B (Micro)</h3>
         <span class="precio">$300 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('OTG Tipo B (Micro)', '*Nota importante: Algunos telefonos con entrada tipo B, presentan incompatibilidad con OTG y con memorias USB.<br><br>Dicho lo anterior, debe probar su memoria USB con el OTG que va a comprar.')">Ver detalles</button>
+        <button class="btn-descripcion" onclick="verDescripcion('OTG Tipo B (Micro)', '')">Ver detalles</button>
         <a href="https://wa.me/5358811896?text=Me+interesa+el+OTG+Tipo+B+(Micro)+de+$300+CUP" class="btn-whatsapp">WhatsApp</a>
     </div>
 
@@ -216,54 +216,4 @@
 
 </body>
 </html>
-            <img src="https://i.ibb.co/gMqH6nfn/Lumii-20250921-192528087.jpg" onclick="ampliar(this.src)" alt="MicroSD">
-        </div>
-        <h3>Micro SD 64GB</h3>
-        <span class="precio">$2400 CUP</span>
-        <a href="https://wa.me/5358811896?text=Me+interesa+la+Micro+SD+64GB+de+$2400+CUP" class="btn-whatsapp">WhatsApp</a>
-    </div>
 
-    <div class="producto almacenamiento">
-        <div class="img-container">
-            <img src="https://i.ibb.co/6cnpqPTr/1000218192.jpg" onclick="ampliar(this.src)" alt="Memorias USB 32gb">
-        </div>
-        <h3>Memorias USB 32GB</h3>
-        <span class="precio">$2000 CUP</span>
-        <a href="https://wa.me/5358811896?text=Me+interesa+la+Memoria+USB+32GB+de+$2000+CUP" class="btn-whatsapp">WhatsApp</a>
-    </div>
-
-    <div class="producto almacenamiento">
-        <div class="img-container">
-            <img src="https://i.ibb.co/HfH5N9nT/1000190920.jpg" onclick="ampliar(this.src)" alt="Discos duros">
-        </div>
-        <h3>Discos duros</h3>
-        <div style="height: 16px; margin-bottom: 12px;"></div>
-        <button class="btn-agotado">Agotado</button>
-    </div>
-
-</div>
-
-<script>
-    function ampliar(src) {
-        document.getElementById("imgAmpliada").src = src;
-        document.getElementById("miModal").style.display = "flex";
-    }
-
-    function filtrar(categoria, boton) {
-        const botones = document.querySelectorAll('.btn-filtro');
-        botones.forEach(b => b.classList.remove('activo'));
-        boton.classList.add('activo');
-        
-        const productos = document.querySelectorAll('.producto');
-        productos.forEach(p => {
-            if (categoria === 'todos' || p.classList.contains(categoria)) {
-                p.style.display = 'flex';
-            } else {
-                p.style.display = 'none';
-            }
-        });
-    }
-</script>
-
-</body>
-</html>
