@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="theme-color" content="#1a1a2e">
-    <title>Tienda Bacardí</title>
+    <title>Mi tienda online</title>
     <style>
         :root {
             --primary: #1a1a2e;
@@ -23,11 +23,10 @@
         .btn-filtro { padding: 10px 22px; border: 1.5px solid var(--primary); border-radius: 25px; background: white; white-space: nowrap; font-weight: bold; font-size: 14px; cursor: pointer; }
         .btn-filtro.activo { background: var(--primary); color: white; }
 
-        /* Ajuste para que las imágenes no se descontrolen */
         .tienda { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
         .producto { background: white; border-radius: 15px; padding: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; flex-direction: column; justify-content: space-between; }
 
-        .img-container { width: 100%; height: 130px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative; overflow: hidden; }
+        .img-container { width: 100%; height: 130px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative; }
         .img-container img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; cursor: pointer; }
         
         .badge-fotos { position: absolute; bottom: 5px; right: 5px; background: rgba(0,0,0,0.7); color: white; font-size: 10px; padding: 3px 8px; border-radius: 10px; font-weight: bold; pointer-events: none; }
@@ -55,7 +54,7 @@
 <body>
 
 <header>
-    <h1 style="margin:0; font-size: 28px; letter-spacing: 1px;">Tienda Bacardí</h1>
+    <h1 style="margin:0; font-size: 28px; letter-spacing: 1px;">Mi tienda online</h1>
 </header>
 
 <div class="filtros">
@@ -79,7 +78,7 @@
         </div>
         <h3>Cargadores</h3>
         <span class="precio">$1800 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Cargadores', '')">Ver detalles</button>
+        <button class="btn-descripcion" onclick="verDescripcion('Cargadores', 'Cargadores de alta velocidad compatibles con múltiples modelos.')">Ver detalles</button>
         <a href="https://wa.me/5358811896?text=Me+interesa+el+Cargador+de+$1800+CUP" class="btn-whatsapp">WhatsApp</a>
     </div>
 
@@ -89,8 +88,18 @@
         </div>
         <h3>Cargadores</h3>
         <span class="precio">$750 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Cargadores', '')">Ver detalles</button>
+        <button class="btn-descripcion" onclick="verDescripcion('Cargadores', 'Cargador económico y funcional.')">Ver detalles</button>
         <a href="https://wa.me/5358811896?text=Me+interesa+el+Cargador+de+$750+CUP" class="btn-whatsapp">WhatsApp</a>
+    </div>
+
+    <div class="producto conectividad">
+        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/HpdRBhm1/1000218191.jpg'])">
+            <img src="https://i.ibb.co/HpdRBhm1/1000218191.jpg">
+        </div>
+        <h3>Cable Tipo B (Micro USB)</h3>
+        <span class="precio">$700 CUP</span>
+        <button class="btn-descripcion" onclick="verDescripcion('Cable Tipo B', 'Cable de datos y carga para dispositivos con entrada Micro USB.')">Ver detalles</button>
+        <a href="https://wa.me/5358811896?text=Me+interesa+el+Cable+Tipo+B+de+$700+CUP" class="btn-whatsapp">WhatsApp</a>
     </div>
 
     <div class="producto conectividad">
@@ -100,7 +109,7 @@
         </div>
         <h3>OTG Tipo C</h3>
         <span class="precio">$210 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('OTG Tipo C', '')">Ver detalles</button>
+        <button class="btn-descripcion" onclick="verDescripcion('OTG Tipo C', 'Adaptador para conectar memorias a teléfonos tipo C.')">Ver detalles</button>
         <a href="https://wa.me/5358811896?text=Me+interesa+el+OTG+Tipo+C+de+$210+CUP" class="btn-whatsapp">WhatsApp</a>
     </div>
 
@@ -111,7 +120,7 @@
         </div>
         <h3>OTG Tipo B (Micro)</h3>
         <span class="precio">$300 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('OTG Tipo B (Micro)', '')">Ver detalles</button>
+        <button class="btn-descripcion" onclick="verDescripcion('OTG Tipo B (Micro)', 'Adaptador para teléfonos con entrada antigua (Micro USB).')">Ver detalles</button>
         <a href="https://wa.me/5358811896?text=Me+interesa+el+OTG+Tipo+B+(Micro)+de+$300+CUP" class="btn-whatsapp">WhatsApp</a>
     </div>
 
