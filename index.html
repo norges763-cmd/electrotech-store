@@ -18,6 +18,20 @@
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); -webkit-tap-highlight-color: transparent; }
         header { background: var(--primary); color: white; padding: 30px 15px; text-align: center; position: sticky; top: 0; z-index: 1000; }
 
+        /* Estilos para el nuevo botón inferior */
+        .seccion-compartir { text-align: center; padding: 40px 15px; background: #f0f0f0; margin-top: 20px; }
+        .btn-final-compartir { 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 15px 35px; 
+            border-radius: 30px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+        }
+
         .filtros { display: flex; overflow-x: auto; gap: 10px; padding: 20px 15px; scrollbar-width: none; }
         .filtros::-webkit-scrollbar { display: none; }
         .btn-filtro { padding: 10px 22px; border: 1.5px solid var(--primary); border-radius: 25px; background: white; white-space: nowrap; font-weight: bold; font-size: 14px; cursor: pointer; }
@@ -39,8 +53,12 @@
         .btn-agotado { background: var(--danger); color: white; border: none; padding: 10px; border-radius: 10px; font-size: 13px; font-weight: bold; opacity: 0.9; width: 100%; margin-top: 5px; }
 
         .modal { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); flex-direction: column; justify-content: center; align-items: center; }
-        .carrusel-container { width: 100%; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
-        .carrusel-item { min-width: 100%; width: 100%; display: flex; justify-content: center; align-items: center; scroll-snap-align: center; }
+        .modal.modo-texto { background: white; }
+        .modal.modo-texto .btn-cerrar { color: #333; background: rgba(0,0,0,0.1); }
+        .modal.modo-texto .modal-text { color: #333; }
+
+        .carrusel-container { width: 100%; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .carrusel-item { min-width: 100%; width: 100%; display: flex; justify-content: center; align-items: center; scroll-snap-align: center; scroll-snap-stop: always; }
         .carrusel-item img { max-width: 95%; max-height: 75vh; object-fit: contain; }
         
         .modal-text { color: white; padding: 25px; text-align: center; max-width: 85%; }
@@ -72,14 +90,24 @@
 <div class="tienda">
 
     <div class="producto conectividad">
+        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/gMqH6nfn/Lumii-20250921-192528087.jpg'])">
+            <img src="https://i.ibb.co/gMqH6nfn/Lumii-20250921-192528087.jpg">
+        </div>
+        <h3>Micros SD de 64gb</h3>
+        <span class="precio">$2300 CUP</span>
+        <button class="btn-descripcion" onclick="verDescripcion('Micros SD de 64gb', '')">Ver detalles</button>
+        <a href="https://wa.me/5358811896?text=Me+interesa+la+Micro+SD+64gb+de+$2300+CUP" class="btn-whatsapp">WhatsApp</a>
+    </div>
+
+    <div class="producto conectividad">
         <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/KjY3KDTV/Lumii-20251209-160415678.jpg', 'https://i.ibb.co/V0CXfdm4/1000218215.jpg', 'https://i.ibb.co/zTzDgsD6/1000218214.jpg', 'https://i.ibb.co/B58Tbb2B/1000218213.jpg'])">
             <img src="https://i.ibb.co/KjY3KDTV/Lumii-20251209-160415678.jpg">
             <span class="badge-fotos">4 fotos</span>
         </div>
-        <h3>Cargadores</h3>
+        <h3>Cargadores de doble puerto</h3>
         <span class="precio">$1800 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Cargadores', 'Cargadores de alta velocidad compatibles con múltiples modelos.')">Ver detalles</button>
-        <a href="https://wa.me/5358811896?text=Me+interesa+el+Cargador+de+$1800+CUP" class="btn-whatsapp">WhatsApp</a>
+        <button class="btn-descripcion" onclick="verDescripcion('Cargadores de doble puerto', '')">Ver detalles</button>
+        <a href="https://wa.me/5358811896?text=Me+interesa+el+Cargador+de+doble+puerto+de+$1800+CUP" class="btn-whatsapp">WhatsApp</a>
     </div>
 
     <div class="producto conectividad">
@@ -88,7 +116,7 @@
         </div>
         <h3>Cargadores</h3>
         <span class="precio">$750 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Cargadores', 'Cargador económico y funcional.')">Ver detalles</button>
+        <button class="btn-descripcion" onclick="verDescripcion('Cargadores', '')">Ver detalles</button>
         <a href="https://wa.me/5358811896?text=Me+interesa+el+Cargador+de+$750+CUP" class="btn-whatsapp">WhatsApp</a>
     </div>
 
@@ -98,7 +126,7 @@
         </div>
         <h3>Cable Tipo B (Micro USB)</h3>
         <span class="precio">$700 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Cable Tipo B', 'Cable de datos y carga para dispositivos con entrada Micro USB.')">Ver detalles</button>
+        <button class="btn-descripcion" onclick="verDescripcion('Cable Tipo B', '')">Ver detalles</button>
         <a href="https://wa.me/5358811896?text=Me+interesa+el+Cable+Tipo+B+de+$700+CUP" class="btn-whatsapp">WhatsApp</a>
     </div>
 
@@ -109,7 +137,7 @@
         </div>
         <h3>OTG Tipo C</h3>
         <span class="precio">$210 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('OTG Tipo C', 'Adaptador para conectar memorias a teléfonos tipo C.')">Ver detalles</button>
+        <button class="btn-descripcion" onclick="verDescripcion('OTG Tipo C', '')">Ver detalles</button>
         <a href="https://wa.me/5358811896?text=Me+interesa+el+OTG+Tipo+C+de+$210+CUP" class="btn-whatsapp">WhatsApp</a>
     </div>
 
@@ -120,7 +148,7 @@
         </div>
         <h3>OTG Tipo B (Micro)</h3>
         <span class="precio">$300 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('OTG Tipo B (Micro)', 'Adaptador para teléfonos con entrada antigua (Micro USB).')">Ver detalles</button>
+        <button class="btn-descripcion" onclick="verDescripcion('OTG Tipo B (Micro)', '*Nota importante: algunos telefonos con entrada B, presentan problemas de incompatibilidad con OTG y memorias USB.')">Ver detalles</button>
         <a href="https://wa.me/5358811896?text=Me+interesa+el+OTG+Tipo+B+(Micro)+de+$300+CUP" class="btn-whatsapp">WhatsApp</a>
     </div>
 
@@ -179,10 +207,64 @@
 
 </div>
 
+<div class="seccion-compartir">
+    <button class="btn-final-compartir" onclick="compartirTienda()">
+        Copiar enlace
+    </button>
+</div>
+
 <script>
+    async function compartirTienda() {
+        const shareData = {
+            title: 'Mi tienda online',
+            text: 'Mira estos productos disponibles en mi tienda',
+            url: window.location.href
+        };
+
+        try {
+            if (navigator.share) {
+                await navigator.share(shareData);
+            } else {
+                copiarAlPortapapeles(window.location.href);
+            }
+        } catch (err) {
+            console.log("Compartir cancelado");
+        }
+    }
+
+    function copiarAlPortapapeles(texto) {
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(texto)
+                .then(() => alert("¡Enlace copiado al portapapeles!"))
+                .catch(() => fallbackCopiar(texto));
+        } else {
+            fallbackCopiar(texto);
+        }
+    }
+
+    function fallbackCopiar(texto) {
+        const textArea = document.createElement("textarea");
+        textArea.value = texto;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            alert("¡Enlace copiado al portapapeles!");
+        } catch (err) {
+            alert("Error al copiar.");
+        }
+        document.body.removeChild(textArea);
+    }
+
     function abrirCarrusel(listaFotos) {
+        const modal = document.getElementById("miModal");
         const carrusel = document.getElementById("carrusel");
         const instruccion = document.getElementById("txtInstruccion");
+        
+        modal.classList.remove("modo-texto"); 
         carrusel.innerHTML = "";
         listaFotos.forEach(foto => {
             const div = document.createElement("div");
@@ -191,24 +273,32 @@
             carrusel.appendChild(div);
         });
         instruccion.style.display = (listaFotos.length > 1) ? "block" : "none";
-        document.getElementById("miModal").style.display = "flex";
+        modal.style.display = "flex";
         carrusel.scrollLeft = 0;
     }
 
     function verDescripcion(nombre, texto) {
+        const modal = document.getElementById("miModal");
         const carrusel = document.getElementById("carrusel");
         const instruccion = document.getElementById("txtInstruccion");
+        
+        modal.classList.add("modo-texto"); 
+        
+        let contenido = texto.trim() === "" ? "Contactar para más información." : texto;
+        
         carrusel.innerHTML = `
             <div class="modal-text">
                 <h2>${nombre}</h2>
-                <p>${texto}</p>
+                <p>${contenido}</p>
             </div>
         `;
         instruccion.style.display = "none";
-        document.getElementById("miModal").style.display = "flex";
+        modal.style.display = "flex";
     }
 
-    function cerrarModal() { document.getElementById("miModal").style.display = "none"; }
+    function cerrarModal() { 
+        document.getElementById("miModal").style.display = "none"; 
+    }
 
     function filtrar(categoria, boton) {
         const botones = document.querySelectorAll('.btn-filtro');
