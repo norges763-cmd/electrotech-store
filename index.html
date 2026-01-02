@@ -1,15 +1,13 @@
-       .<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-       <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKPRZS8BVW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-PKPRZS8BVW');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKPRZS8BVW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-PKPRZS8BVW');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="theme-color" content="#1a1a2e">
@@ -27,7 +25,6 @@
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); -webkit-tap-highlight-color: transparent; }
         header { background: var(--primary); color: white; padding: 30px 15px; text-align: center; position: sticky; top: 0; z-index: 1000; }
 
-        /* Estilos para el nuevo botón inferior */
         .seccion-compartir { text-align: center; padding: 40px 15px; background: #f0f0f0; margin-top: 20px; }
         .btn-final-compartir { 
             background: var(--primary); 
@@ -41,10 +38,32 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
         }
 
+        /* --- Estilos de Filtros Actualizados --- */
         .filtros { display: flex; overflow-x: auto; gap: 10px; padding: 20px 15px; scrollbar-width: none; }
         .filtros::-webkit-scrollbar { display: none; }
-        .btn-filtro { padding: 10px 22px; border: 1.5px solid var(--primary); border-radius: 25px; background: white; white-space: nowrap; font-weight: bold; font-size: 14px; cursor: pointer; }
-        .btn-filtro.activo { background: var(--primary); color: white; }
+        
+        .btn-filtro { 
+            padding: 10px 22px; 
+            border: 1.5px solid var(--primary); 
+            border-radius: 25px; 
+            background: white; 
+            white-space: nowrap; 
+            font-weight: bold; 
+            font-size: 14px; 
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.4; /* Se ven opacos por defecto */
+            color: var(--primary);
+        }
+
+        .btn-filtro.activo { 
+            background: var(--primary); 
+            color: white; 
+            opacity: 1; /* Resalta al 100% */
+            transform: scale(1.05); /* Ligeramente más grande */
+            box-shadow: 0 4px 10px rgba(26, 26, 46, 0.2);
+        }
+        /* -------------------------------------- */
 
         .tienda { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
         .producto { background: white; border-radius: 15px; padding: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; flex-direction: column; justify-content: space-between; }
@@ -313,6 +332,7 @@
         const botones = document.querySelectorAll('.btn-filtro');
         botones.forEach(b => b.classList.remove('activo'));
         boton.classList.add('activo');
+        
         const productos = document.querySelectorAll('.producto');
         productos.forEach(p => {
             if (categoria === 'todos' || p.classList.contains(categoria)) {
