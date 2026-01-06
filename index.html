@@ -52,18 +52,17 @@
             font-size: 14px; 
             cursor: pointer;
             transition: all 0.3s ease;
-            opacity: 0.4; /* Se ven opacos por defecto */
+            opacity: 0.4; 
             color: var(--primary);
         }
 
         .btn-filtro.activo { 
             background: var(--primary); 
             color: white; 
-            opacity: 1; /* Resalta al 100% */
-            transform: scale(1.05); /* Ligeramente más grande */
+            opacity: 1; 
+            transform: scale(1.05); 
             box-shadow: 0 4px 10px rgba(26, 26, 46, 0.2);
         }
-        /* -------------------------------------- */
 
         .tienda { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
         .producto { background: white; border-radius: 15px; padding: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; flex-direction: column; justify-content: space-between; }
@@ -136,6 +135,17 @@
         <span class="precio">$1800 CUP</span>
         <button class="btn-descripcion" onclick="verDescripcion('Cargadores de doble puerto', '')">Ver detalles</button>
         <a href="https://wa.me/5358811896?text=Me+interesa+el+Cargador+de+doble+puerto+de+$1800+CUP" class="btn-whatsapp">WhatsApp</a>
+    </div>
+
+    <div class="producto conectividad">
+        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/mVZXcbVH/1000223219.jpg', 'https://i.ibb.co/ccrSKPJH/1000223220.jpg', 'https://i.ibb.co/sJCtB30M/1000223221.jpg', 'https://i.ibb.co/xSMb89yF/1000223222.jpg', 'https://i.ibb.co/WWsK8krj/1000223223.jpg'])">
+            <img src="https://i.ibb.co/mVZXcbVH/1000223219.jpg">
+            <span class="badge-fotos">5 fotos</span>
+        </div>
+        <h3>Power banks</h3>
+        <span class="precio">---</span>
+        <button class="btn-descripcion" onclick="verDescripcion('Power banks', 'Baterías portátiles de alta capacidad.')">Ver detalles</button>
+        <button class="btn-agotado">Agotado</button>
     </div>
 
     <div class="producto conectividad">
