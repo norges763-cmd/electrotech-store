@@ -38,7 +38,12 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
         }
 
-        /* --- Estilos de Filtros Actualizados --- */
+        .seccion-peticion { padding: 25px 15px; background: white; margin: 20px 15px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
+        .seccion-peticion h2 { font-size: 18px; color: var(--primary); margin-bottom: 5px; }
+        .seccion-peticion p { font-size: 14px; color: #666; margin-bottom: 15px; line-height: 1.4; }
+        .input-peticion { width: 100%; border: 1.5px solid #ddd; border-radius: 10px; padding: 12px; font-family: inherit; font-size: 14px; box-sizing: border-box; margin-bottom: 15px; resize: none; }
+        .btn-peticion { background: var(--whatsapp); color: white; border: none; padding: 12px 25px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; font-size: 15px; }
+
         .filtros { display: flex; overflow-x: auto; gap: 10px; padding: 20px 15px; scrollbar-width: none; }
         .filtros::-webkit-scrollbar { display: none; }
         
@@ -106,6 +111,7 @@
     <button class="btn-filtro activo" onclick="filtrar('todos', this)">Todos</button>
     <button class="btn-filtro" onclick="filtrar('conectividad', this)">Accesorios para teléfonos</button>
     <button class="btn-filtro" onclick="filtrar('almacenamiento', this)">Almacenamiento</button>
+    <button class="btn-filtro" onclick="filtrar('otros', this)">Otros</button>
 </div>
 
 <div id="miModal" class="modal">
@@ -243,6 +249,35 @@
         <button class="btn-agotado">Agotado</button>
     </div>
 
+    <div class="producto otros">
+        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/bMTy9Hxh/1000146970.jpg', 'https://i.ibb.co/zhHS8dKD/1000146969.jpg'])">
+            <img src="https://i.ibb.co/bMTy9Hxh/1000146970.jpg">
+            <span class="badge-fotos">2 fotos</span>
+        </div>
+        <h3>Medias</h3>
+        <span class="precio">$350 CUP</span>
+        <button class="btn-descripcion" onclick="verDescripcion('Medias', 'Diferentes tallas y modelos disponibles.')">Ver detalles</button>
+        <a href="https://wa.me/5358811896?text=Me+interesa+la+Media+de+350+CUP" class="btn-whatsapp">WhatsApp</a>
+    </div>
+
+    <div class="producto otros">
+        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/RGpLkX27/1000146437.jpg', 'https://i.ibb.co/WW6cXZbT/1000147486.jpg', 'https://i.ibb.co/BVC4JGWm/1000147487.jpg'])">
+            <img src="https://i.ibb.co/RGpLkX27/1000146437.jpg">
+            <span class="badge-fotos">3 fotos</span>
+        </div>
+        <h3>Mangas para el sol</h3>
+        <span class="precio">$800 CUP el par</span>
+        <button class="btn-descripcion" onclick="verDescripcion('Mangas para el sol', 'Color disponibles blancas y grises.')">Ver detalles</button>
+        <a href="https://wa.me/5358811896?text=Me+interesa+la+Manga+para+el+sol+de+800+CUP" class="btn-whatsapp">WhatsApp</a>
+    </div>
+
+</div>
+
+<div class="seccion-peticion">
+    <h2>¿Qué necesitas?</h2>
+    <p>Si necesitas otro producto que no está en la tienda, por favor haz un comentario, y se tendrá en cuenta.</p>
+    <textarea id="textoPeticion" class="input-peticion" placeholder="Escribe aquí el producto que buscas..." rows="3"></textarea>
+    <button class="btn-peticion" onclick="enviarPeticion()">Enviar a WhatsApp</button>
 </div>
 
 <div class="seccion-compartir">
@@ -252,6 +287,16 @@
 </div>
 
 <script>
+    function enviarPeticion() {
+        const texto = document.getElementById("textoPeticion").value;
+        if (texto.trim() === "") {
+            alert("Por favor, escribe algo antes de enviar.");
+            return;
+        }
+        const mensaje = encodeURIComponent("Hola, necesito lo siguiente: " + texto);
+        window.location.href = "https://wa.me/5358811896?text=" + mensaje;
+    }
+
     async function compartirTienda() {
         const shareData = {
             title: 'Mi tienda online',
