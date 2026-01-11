@@ -20,10 +20,27 @@
             --bg: #f8f9fa;
             --danger: #e74c3c;
             --info: #34495e;
+            --warning-bg: #fff3cd;
+            --warning-text: #856404;
         }
 
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); -webkit-tap-highlight-color: transparent; }
         header { background: var(--primary); color: white; padding: 30px 15px; text-align: center; position: sticky; top: 0; z-index: 1000; }
+
+        /* Estilos para la nueva advertencia */
+        .aviso-precios {
+            background-color: var(--warning-bg);
+            color: var(--warning-text);
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            border-bottom: 1px solid #ffeeba;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
 
         .seccion-compartir { text-align: center; padding: 40px 15px; background: #f0f0f0; margin-top: 20px; }
         .btn-final-compartir { 
@@ -106,6 +123,10 @@
 <header>
     <h1 style="margin:0; font-size: 28px; letter-spacing: 1px;">Mi tienda online</h1>
 </header>
+
+<div class="aviso-precios">
+    <span>⚠️ Algunos precios pueden variar debido a la constante fluctuación del USD</span>
+</div>
 
 <div class="filtros">
     <button class="btn-filtro activo" onclick="filtrar('todos', this)">Todos</button>
