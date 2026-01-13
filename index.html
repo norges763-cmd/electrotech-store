@@ -41,17 +41,44 @@
             gap: 10px;
         }
 
-        .seccion-compartir { text-align: center; padding: 40px 15px; background: #f0f0f0; margin-top: 20px; }
+        /* SECCION COMPARTIR ACTUALIZADA */
+        .seccion-compartir { 
+            text-align: center; 
+            padding: 40px 15px; 
+            background: #f0f0f0; 
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px; 
+        }
+
+        .btn-final-copiar { 
+            background: var(--info); 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            border-radius: 30px; 
+            font-size: 14px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        }
+
         .btn-final-compartir { 
             background: var(--primary); 
             color: white; 
             border: none; 
-            padding: 15px 35px; 
-            border-radius: 30px; 
-            font-size: 16px; 
-            font-weight: bold; 
+            width: 45px; 
+            height: 45px; 
+            border-radius: 50%; 
+            font-size: 20px; 
             cursor: pointer; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 0;
         }
 
         .seccion-peticion { padding: 25px 15px; background: white; margin: 20px 15px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
@@ -334,8 +361,11 @@
 </div>
 
 <div class="seccion-compartir">
-    <button class="btn-final-compartir" onclick="compartirTienda()">
+    <button class="btn-final-copiar" onclick="copiarAlPortapapeles(window.location.href)">
         Copiar enlace
+    </button>
+    <button class="btn-final-compartir" onclick="compartirTienda()" title="Compartir">
+        &#10150;
     </button>
 </div>
 
