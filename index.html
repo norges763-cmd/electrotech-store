@@ -24,7 +24,6 @@
             --warning-text: #856404;
         }
 
-        /* Se añadió padding-bottom para que la barra de navegación no tape los botones */
         body { 
             font-family: 'Segoe UI', sans-serif; 
             margin: 0; 
@@ -120,7 +119,7 @@
         }
 
         .tienda { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
-        .producto { background: white; border-radius: 15px; padding: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; flex-direction: column; justify-content: space-between; }
+        .producto { background: white; border-radius: 15px; padding: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; flex-direction: column; justify-content: space-between; position: relative; }
 
         .img-container { width: 100%; height: 130px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative; }
         .img-container img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; cursor: pointer; }
@@ -130,7 +129,20 @@
         h3 { font-size: 15px; margin: 10px 0 5px 0; color: #333; height: 40px; overflow: hidden; }
         .precio { font-size: 16px; color: var(--accent); font-weight: bold; margin-bottom: 12px; display: block; }
         
-        .btn-whatsapp { background: var(--whatsapp); color: white; text-decoration: none; padding: 10px; border-radius: 10px; font-size: 13px; font-weight: bold; display: block; margin-top: 5px; }
+        .btn-whatsapp { 
+            background: var(--whatsapp); 
+            color: white; 
+            border: none; 
+            padding: 10px; 
+            border-radius: 10px; 
+            font-size: 13px; 
+            font-weight: bold; 
+            display: block; 
+            width: 100%;
+            margin-top: 5px; 
+            cursor: pointer;
+        }
+
         .btn-descripcion { background: var(--info); color: white; border: none; padding: 10px; border-radius: 10px; font-size: 12px; font-weight: bold; cursor: pointer; width: 100%; }
         .btn-agotado { background: var(--danger); color: white; border: none; padding: 10px; border-radius: 10px; font-size: 13px; font-weight: bold; opacity: 0.9; width: 100%; margin-top: 5px; }
 
@@ -150,6 +162,110 @@
 
         .btn-cerrar { position: absolute; top: 30px; right: 30px; color: white; font-size: 40px; cursor: pointer; z-index: 10001; background: rgba(255,255,255,0.1); width: 45px; height: 45px; display: flex; justify-content: center; align-items: center; border-radius: 50%; }
         .instruccion { color: white; margin-top: 20px; font-size: 14px; opacity: 0.8; background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 20px; }
+
+        .carrito-flotante {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--accent);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 2000;
+            transition: transform 0.2s;
+        }
+        .carrito-flotante:active { transform: scale(0.9); }
+        .contador-carrito {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--danger);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        #modalCarrito {
+            background: white;
+            justify-content: flex-start;
+            padding-top: 60px;
+            overflow-y: auto;
+        }
+        .carrito-contenido {
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+        .item-carrito {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .item-info img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+        .item-detalles h4 { margin: 0; font-size: 14px; color: #333; }
+        .item-detalles span { font-size: 12px; color: #777; }
+        .btn-eliminar { color: var(--danger); cursor: pointer; font-size: 20px; padding: 0 10px; background: none; border: none; }
+        .carrito-total {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+            border-top: 2px solid #eee;
+            padding-top: 15px;
+        }
+        .btn-pedir-todo {
+            background: var(--whatsapp);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 12px;
+            margin-top: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fly-img {
+            position: fixed;
+            z-index: 3000;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            opacity: 0.8;
+            pointer-events: none;
+            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
     </style>
 </head>
 <body>
@@ -176,189 +292,28 @@
     <p id="txtInstruccion" class="instruccion">Desliza suavemente</p>
 </div>
 
-<div class="tienda">
-    <div class="producto conectividad">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/gMqH6nfn/Lumii-20250921-192528087.jpg'])">
-            <img src="https://i.ibb.co/gMqH6nfn/Lumii-20250921-192528087.jpg">
+<div id="modalCarrito" class="modal modo-texto">
+    <span class="btn-cerrar" style="color:#333; background:rgba(0,0,0,0.1);" onclick="cerrarCarrito()">&times;</span>
+    <div class="carrito-contenido">
+        <h2 style="color: var(--primary);">Tu Carrito</h2>
+        <div id="listaCarrito">
+            <p style="text-align:center; color:#777; margin-top:50px;">El carrito está vacío</p>
         </div>
-        <h3>Micros SD de 64gb</h3>
-        <span class="precio">$2300 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Micros SD de 64gb', '')">Ver detalles</button>
-        <a href="https://wa.me/5358811896?text=Me+interesa+la+Micro+SD+64gb+de+$2300+CUP" class="btn-whatsapp">WhatsApp</a>
-    </div>
-
-    <div class="producto conectividad">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/KjY3KDTV/Lumii-20251209-160415678.jpg', 'https://i.ibb.co/V0CXfdm4/1000218215.jpg', 'https://i.ibb.co/zTzDgsD6/1000218214.jpg', 'https://i.ibb.co/B58Tbb2B/1000218213.jpg'])">
-            <img src="https://i.ibb.co/KjY3KDTV/Lumii-20251209-160415678.jpg">
-            <span class="badge-fotos">4 fotos</span>
+        <div id="resumenCarrito" style="display:none;">
+            <div class="carrito-total">Total estimado: $<span id="totalPrecio">0</span></div>
+            <button class="btn-pedir-todo" onclick="enviarPedidoWhatsApp()">
+                WhatsApp (Enviar Pedido)
+            </button>
         </div>
-        <h3>Cargadores de doble puerto</h3>
-        <span class="precio">$1800 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Cargadores de doble puerto', '')">Ver detalles</button>
-        <a href="https://wa.me/5358811896?text=Me+interesa+el+Cargador+de+doble+puerto+de+$1800+CUP" class="btn-whatsapp">WhatsApp</a>
-    </div>
-
-    <div class="producto conectividad">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/mVZXcbVH/1000223219.jpg', 'https://i.ibb.co/ccrSKPJH/1000223220.jpg', 'https://i.ibb.co/sJCtB30M/1000223221.jpg', 'https://i.ibb.co/xSMb89yF/1000223222.jpg', 'https://i.ibb.co/WWsK8krj/1000223223.jpg'])">
-            <img src="https://i.ibb.co/mVZXcbVH/1000223219.jpg">
-            <span class="badge-fotos">5 fotos</span>
-        </div>
-        <h3>Power banks</h3>
-        <span class="precio">---</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Power banks', 'Baterías portátiles de alta capacidad.')">Ver detalles</button>
-        <button class="btn-agotado">Agotado</button>
-    </div>
-
-    <div class="producto conectividad">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/PsBRYb20/1000218217.jpg'])">
-            <img src="https://i.ibb.co/PsBRYb20/1000218217.jpg">
-        </div>
-        <h3>Cargadores</h3>
-        <span class="precio">$750 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Cargadores', '')">Ver detalles</button>
-        <a href="https://wa.me/5358811896?text=Me+interesa+el+Cargador+de+$750+CUP" class="btn-whatsapp">WhatsApp</a>
-    </div>
-
-    <div class="producto conectividad">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/HpdRBhm1/1000218191.jpg'])">
-            <img src="https://i.ibb.co/HpdRBhm1/1000218191.jpg">
-        </div>
-        <h3>Cable Tipo B (Micro USB)</h3>
-        <span class="precio">$700 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Cable Tipo B', '')">Ver detalles</button>
-        <a href="https://wa.me/5358811896?text=Me+interesa+el+Cable+Tipo+B+de+$700+CUP" class="btn-whatsapp">WhatsApp</a>
-    </div>
-
-    <div class="producto conectividad">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/Ng76BvzN/Lumii-20251004-131401596.jpg', 'https://i.ibb.co/Hpbv8K7j/1000218218.jpg'])">
-            <img src="https://i.ibb.co/Ng76BvzN/Lumii-20251004-131401596.jpg">
-            <span class="badge-fotos">2 fotos</span>
-        </div>
-        <h3>OTG Tipo C</h3>
-        <span class="precio">$210 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('OTG Tipo C', '')">Ver detalles</button>
-        <a href="https://wa.me/5358811896?text=Me+interesa+el+OTG+Tipo+C+de+$210+CUP" class="btn-whatsapp">WhatsApp</a>
-    </div>
-
-    <div class="producto conectividad">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/SD0SWwyx/OTG-Tipo-B.jpg', 'https://i.ibb.co/FkwJvHSm/Lumii-20250823-210525036.jpg'])">
-            <img src="https://i.ibb.co/SD0SWwyx/OTG-Tipo-B.jpg">
-            <span class="badge-fotos">2 fotos</span>
-        </div>
-        <h3>OTG Tipo B (Micro)</h3>
-        <span class="precio">$300 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('OTG Tipo B (Micro)', '*Nota importante: algunos telefonos con entrada B, presentan problemas de incompatibilidad con OTG y memorias USB.')">Ver detalles</button>
-        <a href="https://wa.me/5358811896?text=Me+interesa+el+OTG+Tipo+B+(Micro)+de+$300+CUP" class="btn-whatsapp">WhatsApp</a>
-    </div>
-
-    <div class="producto conectividad">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/C3B0YzFm/Lumii-20251209-115131565.jpg', 'https://i.ibb.co/LX7LT9QF/Lumii-20251103-200019676.jpg'])">
-            <img src="https://i.ibb.co/C3B0YzFm/Lumii-20251209-115131565.jpg">
-            <span class="badge-fotos">2 fotos</span>
-        </div>
-        <h3>Cable Tipo C a Tipo C</h3>
-        <span class="precio">$580 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Cable Tipo C a Tipo C', '')">Ver detalles</button>
-        <a href="https://wa.me/5358811896?text=Me+interesa+el+Cable+Tipo+C+a+Tipo+C+de+$580+CUP" class="btn-whatsapp">WhatsApp</a>
-    </div>
-
-    <div class="producto conectividad">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/23FmktSZ/1000217879.jpg', 'https://i.ibb.co/4gm5PDsp/1000218219.jpg'])">
-            <img src="https://i.ibb.co/23FmktSZ/1000217879.jpg">
-            <span class="badge-fotos">2 fotos</span>
-        </div>
-        <h3>Cable Tipo C a USB</h3>
-        <span class="precio">$480 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Cable Tipo C a USB', '')">Ver detalles</button>
-        <a href="https://wa.me/5358811896?text=Me+interesa+el+Cable+Tipo+C+a+USB+de+$480+CUP" class="btn-whatsapp">WhatsApp</a>
-    </div>
-
-    <div class="producto almacenamiento">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/6cnpqPTr/1000218192.jpg', 'https://i.ibb.co/WNsLRj8H/1000135730.jpg'])">
-            <img src="https://i.ibb.co/6cnpqPTr/1000218192.jpg">
-            <span class="badge-fotos">2 fotos</span>
-        </div>
-        <h3>Memorias USB 32GB</h3>
-        <span class="precio">$2000 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Memorias USB 32GB', 'Memorias usb 2.0 de copia rapida. Vienen con sus correas')">Ver detalles</button>
-        <a href="https://wa.me/5358811896?text=Me+interesa+la+Memoria+USB+32GB+de+$2000+CUP" class="btn-whatsapp">WhatsApp</a>
-    </div>
-
-    <div class="producto almacenamiento">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/YFyX1rDQ/1000155412.jpg', 'https://i.ibb.co/twJFPHTy/1000158551.jpg'])">
-            <img src="https://i.ibb.co/YFyX1rDQ/1000155412.jpg">
-            <span class="badge-fotos">2 fotos</span>
-        </div>
-        <h3>Adaptador para Micros SD</h3>
-        <span class="precio">$200 CUP c/u</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Adaptador para Micros SD', 'Adaptador estándar para leer tarjetas Micro SD en ranuras SD.')">Ver detalles</button>
-        <a href="https://wa.me/5358811896?text=Me+interesa+el+Adaptador+para+Micros+SD+de+$200+CUP" class="btn-whatsapp">WhatsApp</a>
-    </div>
-
-    <div class="producto almacenamiento">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/Ngj3BB8w/1000159173.jpg'])">
-            <img src="https://i.ibb.co/Ngj3BB8w/1000159173.jpg">
-        </div>
-        <h3>Memorias USB 64gb 3.0</h3>
-        <span class="precio">---</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Memorias USB 64gb 3.0', 'Memorias USB 3.0 copia ultra rapida. <br><br> *Nota importante: la mayoria de las cajitas decodificadoras no reconocen memorias de 64gb')">Ver detalles</button>
-        <button class="btn-agotado">Agotado</button>
-    </div>
-
-    <div class="producto almacenamiento">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/HfH5N9nT/1000190920.jpg'])">
-            <img src="https://i.ibb.co/HfH5N9nT/1000190920.jpg">
-        </div>
-        <h3>Discos duros</h3>
-        <span class="precio">---</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Discos duros', '')">Ver detalles</button>
-        <button class="btn-agotado">Agotado</button>
-    </div>
-
-    <div class="producto pc">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/m7h8RxX/1000229163.jpg', 'https://i.ibb.co/D3Bq9CB/1000229162.jpg'])">
-            <img src="https://i.ibb.co/m7h8RxX/1000229163.jpg">
-            <span class="badge-fotos">2 fotos</span>
-        </div>
-        <h3>Mouse</h3>
-        <span class="precio">---</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Mouse', '')">Ver detalles</button>
-        <button class="btn-agotado">Agotado</button>
-    </div>
-
-    <div class="producto otros">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/bMTy9Hxh/1000146970.jpg', 'https://i.ibb.co/zhHS8dKD/1000146969.jpg'])">
-            <img src="https://i.ibb.co/bMTy9Hxh/1000146970.jpg">
-            <span class="badge-fotos">2 fotos</span>
-        </div>
-        <h3>Medias</h3>
-        <span class="precio">$350 CUP</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Medias', 'Diferentes tallas y modelos disponibles.')">Ver detalles</button>
-        <a href="https://wa.me/5358811896?text=Me+interesa+la+Media+de+350+CUP" class="btn-whatsapp">WhatsApp</a>
-    </div>
-
-    <div class="producto otros">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/RGpLkX27/1000146437.jpg', 'https://i.ibb.co/WW6cXZbT/1000147486.jpg', 'https://i.ibb.co/BVC4JGWm/1000147487.jpg'])">
-            <img src="https://i.ibb.co/RGpLkX27/1000146437.jpg">
-            <span class="badge-fotos">3 fotos</span>
-        </div>
-        <h3>Mangas para el sol</h3>
-        <span class="precio">$800 CUP el par</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Mangas para el sol', 'Color disponibles blancas y grises.')">Ver detalles</button>
-        <a href="https://wa.me/5358811896?text=Me+interesa+la+Manga+para+el+sol+de+800+CUP" class="btn-whatsapp">WhatsApp</a>
-    </div>
-
-    <div class="producto otros">
-        <div class="img-container" onclick="abrirCarrusel(['https://i.ibb.co/2fG8xqB/1000173994.jpg', 'https://i.ibb.co/6J4XR66G/1000146733.jpg', 'https://i.ibb.co/mVFjQ7ng/1000146732.jpg'])">
-            <img src="https://i.ibb.co/2fG8xqB/1000173994.jpg">
-            <span class="badge-fotos">3 fotos</span>
-        </div>
-        <h3>Mata moscas</h3>
-        <span class="precio">$200 CUP c/u</span>
-        <button class="btn-descripcion" onclick="verDescripcion('Mata moscas', '')">Ver detalles</button>
-        <a href="https://wa.me/5358811896?text=Me+interesa+el+Mata+moscas+de+$200+CUP" class="btn-whatsapp">WhatsApp</a>
     </div>
 </div>
+
+<div class="carrito-flotante" id="btnCarritoFlotante" onclick="abrirCarrito()">
+    🛒
+    <span class="contador-carrito" id="contadorCarrito">0</span>
+</div>
+
+<div class="tienda" id="contenedorTienda"></div>
 
 <div class="seccion-peticion">
     <h2>¿Qué necesitas?</h2>
@@ -377,6 +332,229 @@
 </div>
 
 <script>
+    // --- AUTOMATIZACIÓN JSON DE PRODUCTOS ---
+    const productosData = [
+        {
+            nombre: "Micros SD de 64gb",
+            precio: "$2300 CUP",
+            categoria: "conectividad",
+            fotos: ["https://i.ibb.co/gMqH6nfn/Lumii-20250921-192528087.jpg"],
+            descripcion: "",
+            disponible: true
+        },
+        {
+            nombre: "Cargadores de doble puerto",
+            precio: "$1800 CUP",
+            categoria: "conectividad",
+            fotos: [
+                "https://i.ibb.co/KjY3KDTV/Lumii-20251209-160415678.jpg",
+                "https://i.ibb.co/V0CXfdm4/1000218215.jpg",
+                "https://i.ibb.co/zTzDgsD6/1000218214.jpg",
+                "https://i.ibb.co/B58Tbb2B/1000218213.jpg"
+            ],
+            descripcion: "",
+            disponible: true
+        },
+        {
+            nombre: "Power banks",
+            precio: "---",
+            categoria: "conectividad",
+            fotos: [
+                "https://i.ibb.co/mVZXcbVH/1000223219.jpg",
+                "https://i.ibb.co/ccrSKPJH/1000223220.jpg",
+                "https://i.ibb.co/sJCtB30M/1000223221.jpg",
+                "https://i.ibb.co/xSMb89yF/1000223222.jpg",
+                "https://i.ibb.co/WWsK8krj/1000223223.jpg"
+            ],
+            descripcion: "Baterías portátiles de alta capacidad.",
+            disponible: false
+        },
+        {
+            nombre: "Cargadores",
+            precio: "$750 CUP",
+            categoria: "conectividad",
+            fotos: ["https://i.ibb.co/PsBRYb20/1000218217.jpg"],
+            descripcion: "",
+            disponible: true
+        },
+        {
+            nombre: "Cable Tipo B (Micro USB)",
+            precio: "$700 CUP",
+            categoria: "conectividad",
+            fotos: ["https://i.ibb.co/HpdRBhm1/1000218191.jpg"],
+            descripcion: "",
+            disponible: true
+        },
+        {
+            nombre: "OTG Tipo C",
+            precio: "$210 CUP",
+            categoria: "conectividad",
+            fotos: [
+                "https://i.ibb.co/Ng76BvzN/Lumii-20251004-131401596.jpg",
+                "https://i.ibb.co/Hpbv8K7j/1000218218.jpg"
+            ],
+            descripcion: "",
+            disponible: true
+        },
+        {
+            nombre: "OTG Tipo B (Micro)",
+            precio: "$300 CUP",
+            categoria: "conectividad",
+            fotos: [
+                "https://i.ibb.co/SD0SWwyx/OTG-Tipo-B.jpg",
+                "https://i.ibb.co/FkwJvHSm/Lumii-20250823-210525036.jpg"
+            ],
+            descripcion: "*Nota importante: algunos telefonos con entrada B, presentan problemas de incompatibilidad con OTG y memorias USB.",
+            disponible: true
+        },
+        {
+            nombre: "Cable Tipo C a Tipo C",
+            precio: "$580 CUP",
+            categoria: "conectividad",
+            fotos: [
+                "https://i.ibb.co/C3B0YzFm/Lumii-20251209-115131565.jpg",
+                "https://i.ibb.co/LX7LT9QF/Lumii-20251103-200019676.jpg"
+            ],
+            descripcion: "",
+            disponible: true
+        },
+        {
+            nombre: "Cable Tipo C a USB",
+            precio: "$480 CUP",
+            categoria: "conectividad",
+            fotos: [
+                "https://i.ibb.co/23FmktSZ/1000217879.jpg",
+                "https://i.ibb.co/4gm5PDsp/1000218219.jpg"
+            ],
+            descripcion: "",
+            disponible: true
+        },
+        {
+            nombre: "Memorias USB 32GB",
+            precio: "$2000 CUP",
+            categoria: "almacenamiento",
+            fotos: [
+                "https://i.ibb.co/6cnpqPTr/1000218192.jpg",
+                "https://i.ibb.co/WNsLRj8H/1000135730.jpg"
+            ],
+            descripcion: "Memorias usb 2.0 de copia rapida. Vienen con sus correas",
+            disponible: true
+        },
+        {
+            nombre: "Adaptador para Micros SD",
+            precio: "$200 CUP c/u",
+            categoria: "almacenamiento",
+            fotos: [
+                "https://i.ibb.co/YFyX1rDQ/1000155412.jpg",
+                "https://i.ibb.co/twJFPHTy/1000158551.jpg"
+            ],
+            descripcion: "Adaptador estándar para leer tarjetas Micro SD en ranuras SD.",
+            disponible: true
+        },
+        {
+            nombre: "Memorias USB 64gb 3.0",
+            precio: "---",
+            categoria: "almacenamiento",
+            fotos: ["https://i.ibb.co/Ngj3BB8w/1000159173.jpg"],
+            descripcion: "Memorias USB 3.0 copia ultra rapida. <br><br> *Nota importante: la mayoria de las cajitas decodificadoras no reconocen memorias de 64gb",
+            disponible: false
+        },
+        {
+            nombre: "Discos duros",
+            precio: "---",
+            categoria: "almacenamiento",
+            fotos: ["https://i.ibb.co/HfH5N9nT/1000190920.jpg"],
+            descripcion: "",
+            disponible: false
+        },
+        {
+            nombre: "Mouse",
+            precio: "---",
+            categoria: "pc",
+            fotos: [
+                "https://i.ibb.co/m7h8RxX/1000229163.jpg",
+                "https://i.ibb.co/D3Bq9CB/1000229162.jpg"
+            ],
+            descripcion: "",
+            disponible: false
+        },
+        {
+            nombre: "Medias",
+            precio: "$350 CUP",
+            categoria: "otros",
+            fotos: [
+                "https://i.ibb.co/bMTy9Hxh/1000146970.jpg",
+                "https://i.ibb.co/zhHS8dKD/1000146969.jpg"
+            ],
+            descripcion: "Diferentes tallas y modelos disponibles.",
+            disponible: true
+        },
+        {
+            nombre: "Mangas para el sol",
+            precio: "$800 CUP el par",
+            categoria: "otros",
+            fotos: [
+                "https://i.ibb.co/RGpLkX27/1000146437.jpg",
+                "https://i.ibb.co/WW6cXZbT/1000147486.jpg",
+                "https://i.ibb.co/BVC4JGWm/1000147487.jpg"
+            ],
+            descripcion: "Color disponibles blancas y grises.",
+            disponible: true
+        },
+        {
+            nombre: "Mata moscas",
+            precio: "$200 CUP c/u",
+            categoria: "otros",
+            fotos: [
+                "https://i.ibb.co/2fG8xqB/1000173994.jpg",
+                "https://i.ibb.co/6J4XR66G/1000146733.jpg",
+                "https://i.ibb.co/mVFjQ7ng/1000146732.jpg"
+            ],
+            descripcion: "",
+            disponible: true
+        }
+    ];
+
+    function renderizarTienda(categoriaFiltro = 'todos') {
+        const contenedor = document.getElementById('contenedorTienda');
+        contenedor.innerHTML = "";
+
+        productosData.forEach(prod => {
+            if (categoriaFiltro !== 'todos' && prod.categoria !== categoriaFiltro) return;
+
+            const div = document.createElement('div');
+            div.className = `producto ${prod.categoria}`;
+            
+            // Badge de fotos
+            const badge = prod.fotos.length > 1 ? `<span class="badge-fotos">${prod.fotos.length} fotos</span>` : "";
+            
+            // Botón principal (Carrito o Agotado)
+            let botonAccion = "";
+            if(prod.disponible) {
+                botonAccion = `<button class="btn-whatsapp" onclick="agregarAlCarrito(this, '${prod.nombre}', '${prod.precio}', '${prod.fotos[0]}')">Me interesa</button>`;
+            } else {
+                botonAccion = `<button class="btn-agotado">Agotado</button>`;
+            }
+
+            div.innerHTML = `
+                <div class="img-container" onclick='abrirCarrusel(${JSON.stringify(prod.fotos)})'>
+                    <img src="${prod.fotos[0]}" loading="lazy">
+                    ${badge}
+                </div>
+                <h3>${prod.nombre}</h3>
+                <span class="precio">${prod.precio}</span>
+                <button class="btn-descripcion" onclick="verDescripcion('${prod.nombre}', '${prod.descripcion}')">Ver detalles</button>
+                ${botonAccion}
+            `;
+            contenedor.appendChild(div);
+        });
+    }
+
+    // Inicializar tienda
+    renderizarTienda();
+
+    let carrito = [];
+
     function enviarPeticion() {
         const texto = document.getElementById("textoPeticion").value;
         if (texto.trim() === "") {
@@ -442,7 +620,7 @@
         listaFotos.forEach(foto => {
             const div = document.createElement("div");
             div.className = "carrusel-item";
-            div.innerHTML = `<img src="${foto}">`;
+            div.innerHTML = `<img src="${foto}" loading="lazy">`;
             carrusel.appendChild(div);
         });
         instruccion.style.display = (listaFotos.length > 1) ? "block" : "none";
@@ -457,7 +635,7 @@
         
         modal.classList.add("modo-texto"); 
         
-        let contenido = texto.trim() === "" ? "Contactar para más información." : texto;
+        let contenido = (texto === undefined || texto.trim() === "") ? "Contactar para más información." : texto;
         
         carrusel.innerHTML = `
             <div class="modal-text">
@@ -478,12 +656,120 @@
         botones.forEach(b => b.classList.remove('activo'));
         boton.classList.add('activo');
         
-        const productos = document.querySelectorAll('.producto');
-        productos.forEach(p => {
-            if (categoria === 'todos' || p.classList.contains(categoria)) {
-                p.style.display = 'flex';
-            } else { p.style.display = 'none'; }
+        // Simplemente volvemos a renderizar con el filtro
+        renderizarTienda(categoria);
+    }
+
+    /* --- LÓGICA DEL CARRITO --- */
+
+    function agregarAlCarrito(boton, nombre, precioTexto, imgUrl) {
+        animarVuelo(boton, imgUrl);
+        carrito.push({ nombre, precioTexto, imgUrl });
+        actualizarContador();
+    }
+
+    function animarVuelo(boton, imgUrl) {
+        const rectBtn = boton.getBoundingClientRect();
+        const startX = rectBtn.left + rectBtn.width / 2;
+        const startY = rectBtn.top + rectBtn.height / 2;
+
+        const cartBtn = document.getElementById('btnCarritoFlotante');
+        const rectCart = cartBtn.getBoundingClientRect();
+        const endX = rectCart.left + rectCart.width / 2;
+        const endY = rectCart.top + rectCart.height / 2;
+
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.className = 'fly-img';
+        img.style.left = (startX - 50) + 'px';
+        img.style.top = (startY - 50) + 'px';
+        document.body.appendChild(img);
+
+        void img.offsetWidth;
+
+        img.style.left = (endX - 50) + 'px';
+        img.style.top = (endY - 50) + 'px';
+        img.style.width = '20px';
+        img.style.height = '20px';
+        img.style.opacity = '0';
+
+        setTimeout(() => {
+            img.remove();
+        }, 800);
+    }
+
+    function actualizarContador() {
+        const count = document.getElementById('contadorCarrito');
+        count.innerText = carrito.length;
+        
+        const btn = document.getElementById('btnCarritoFlotante');
+        btn.style.transform = "scale(1.2)";
+        setTimeout(() => btn.style.transform = "scale(1)", 200);
+    }
+
+    function abrirCarrito() {
+        const modal = document.getElementById('modalCarrito');
+        const lista = document.getElementById('listaCarrito');
+        const resumen = document.getElementById('resumenCarrito');
+        const totalSpan = document.getElementById('totalPrecio');
+
+        lista.innerHTML = "";
+        let total = 0;
+
+        if (carrito.length === 0) {
+            lista.innerHTML = '<p style="text-align:center; color:#777; margin-top:50px;">El carrito está vacío</p>';
+            resumen.style.display = "none";
+        } else {
+            carrito.forEach((item, index) => {
+                const precioNum = parseInt(item.precioTexto.replace(/\D/g, '')) || 0;
+                total += precioNum;
+
+                const div = document.createElement('div');
+                div.className = 'item-carrito';
+                div.innerHTML = `
+                    <div class="item-info">
+                        <img src="${item.imgUrl}">
+                        <div class="item-detalles">
+                            <h4>${item.nombre}</h4>
+                            <span>${item.precioTexto}</span>
+                        </div>
+                    </div>
+                    <button class="btn-eliminar" onclick="eliminarDelCarrito(${index})">&times;</button>
+                `;
+                lista.appendChild(div);
+            });
+            totalSpan.innerText = total;
+            resumen.style.display = "block";
+        }
+
+        modal.style.display = "flex";
+    }
+
+    function cerrarCarrito() {
+        document.getElementById('modalCarrito').style.display = "none";
+    }
+
+    function eliminarDelCarrito(index) {
+        carrito.splice(index, 1);
+        actualizarContador();
+        abrirCarrito();
+    }
+
+    function enviarPedidoWhatsApp() {
+        if (carrito.length === 0) return;
+
+        let mensaje = "Hola, me interesa comprar los siguientes productos:%0A%0A";
+        let total = 0;
+
+        carrito.forEach(item => {
+            mensaje += `- ${item.nombre} (${item.precioTexto})%0A`;
+            const precioNum = parseInt(item.precioTexto.replace(/\D/g, '')) || 0;
+            total += precioNum;
         });
+
+        mensaje += `%0A*Total Estimado: $${total} CUP*`;
+        
+        window.location.href = "https://wa.me/5358811896?text=" + mensaje;
     }
 </script>
 
