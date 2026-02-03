@@ -1,11 +1,11 @@
 const productosData = [
     {
         nombre: "Micros SD de 64gb",
-        precio: "$2400 CUP",
+        precio: "$2500 CUP",
         categoria: "conectividad",
         fotos: ["https://i.ibb.co/gMqH6nfn/Lumii-20250921-192528087.jpg"],
         descripcion: "",
-        disponible: true
+        disponible: false
     },
     {
         nombre: "Cargadores",
