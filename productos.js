@@ -5,7 +5,7 @@ const productosData = [
         categoria: "conectividad",
         fotos: ["https://i.ibb.co/gMqH6nfn/Lumii-20250921-192528087.jpg"],
         descripcion: "",
-        disponible: false
+        disponible: true
     },
     {
         nombre: "Cargadores",
