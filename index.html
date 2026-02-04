@@ -9,7 +9,7 @@
       gtag('config', 'G-PKPRZS8BVW');
     </script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum- надежный.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#1a1a2e">
     <title>Mi tienda online</title>
     <style>
@@ -393,9 +393,10 @@
             text-align: center;
             margin: 20px 0 10px 0;
             font-size: 20px;
-            padding: 0 15px;
+            padding: 0 15px; 
         }
 
+        /* MODIFICADO: Z-index aumentado para estar sobre el menú de variantes */
         .carrito-flotante {
             position: fixed;
             bottom: 20px;
@@ -411,7 +412,7 @@
             font-size: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             cursor: pointer;
-            z-index: 9999;
+            z-index: 10005; /* Aumentado para verse sobre el modal de variantes (que es 10002) */
             transition: transform 0.2s;
         }
         
@@ -515,9 +516,10 @@
             gap: 10px;
         }
 
+        /* MODIFICADO: Z-index muy alto para que la animación vuele sobre todo */
         .fly-img {
             position: fixed;
-            z-index: 10000;
+            z-index: 20000;
             width: 100px;
             height: 100px;
             object-fit: cover;
@@ -591,9 +593,10 @@
     </button>
 </div>
 
-<script src="productos.js"></script> <script>
+<script src="productos.js"></script> 
+<script>
     // ==========================================
-    // LÓGICA DE LA TIENDA (SIN LA LISTA DE PRODUCTOS)
+    // LÓGICA DE LA TIENDA
     // ==========================================
 
     let carrito = [];
@@ -602,7 +605,6 @@
         const container = document.getElementById('productosContainer');
         container.innerHTML = '';
 
-        // Aquí usamos productosData que viene del otro archivo
         productosData.forEach((p, index) => {
             const fotosJson = JSON.stringify(p.fotos).replace(/"/g, '&quot;');
             let botonHtml = '';
@@ -667,7 +669,12 @@
         const modal = document.getElementById("miModal");
         const carrusel = document.getElementById("carrusel");
         const instruccion = document.getElementById("txtInstruccion");
-        modal.classList.remove("modo-texto"); modal.style.display = "flex";
+        
+        modal.classList.remove("modo-texto"); 
+        modal.style.display = "flex";
+        // Z-Index muy alto para que la imagen a pantalla completa tape incluso el carrito
+        modal.style.zIndex = "30000"; 
+        
         carrusel.innerHTML = "";
         listaFotos.forEach(foto => {
             const div = document.createElement("div");
@@ -684,6 +691,8 @@
         const carrusel = document.getElementById("carrusel");
         const instruccion = document.getElementById("txtInstruccion");
         modal.classList.add("modo-texto");
+        modal.style.zIndex = "9999"; 
+        
         let contenido = (!texto || texto.trim() === "") ? "Contactar para más información." : texto;
         carrusel.innerHTML = `<div class="modal-text"><h2>${nombre}</h2><p>${contenido}</p></div>`;
         instruccion.style.display = "none"; modal.style.display = "flex";
@@ -708,6 +717,8 @@
             selectorModal = document.createElement("div");
             selectorModal.id = "modalSeleccion";
             selectorModal.className = "modal modo-texto";
+            // Z-Index ajustado a 10002. El carrito es 10005, así que el carrito se verá encima.
+            selectorModal.style.zIndex = "10002"; 
             selectorModal.innerHTML = `<span class="btn-cerrar" style="color:#333; background:rgba(0,0,0,0.1);" onclick="cerrarSeleccion()">&times;</span>
                 <div class="selector-contenido"><h2 id="tituloSeleccion" class="selector-titulo">Seleccionar opción</h2><div class="tienda" id="listaOpciones"></div></div>`;
             document.body.appendChild(selectorModal);
@@ -721,15 +732,26 @@
             div.className = "producto";
             const agotado = (op.disponible === false);
             if(agotado) { div.style.opacity = "0.6"; }
-            const fotosJson = JSON.stringify([op.img]).replace(/"/g, '&quot;');
+            
+            const fotoUrl = op.img; 
+            
             div.innerHTML = `
-                <div class="img-container" onclick="abrirCarrusel(${fotosJson})"><img src="${op.img}" loading="lazy"></div>
+                <div class="img-container">
+                    <img src="${fotoUrl}" loading="lazy" class="img-variante-click">
+                </div>
                 <h3>${op.nombre}</h3>
                 <span class="precio">${agotado ? 'Agotado' : op.precio}</span>
                 ${agotado 
                     ? '<button class="btn-agotado">Agotado</button>' 
                     : `<button class="btn-whatsapp" onclick="agregarDesdeSelector(event, '${op.nombre}', '${op.precio}', '${op.img}')">Me interesa</button>`
                 }`;
+
+            const imgElement = div.querySelector('.img-variante-click');
+            imgElement.onclick = (e) => {
+                e.stopPropagation(); 
+                abrirCarrusel([fotoUrl]);
+            };
+
             lista.appendChild(div);
         });
         selectorModal.style.display = "flex";
@@ -776,6 +798,7 @@
         setTimeout(() => btn.style.transform = "scale(1)", 200);
     }
 
+    // MODIFICADO: El carrito ahora tiene z-index 10010 para tapar el menú de variantes
     function abrirCarrito() {
         const modal = document.getElementById('modalCarrito');
         const lista = document.getElementById('listaCarrito');
@@ -797,6 +820,7 @@
             totalSpan.innerText = total; resumen.style.display = "block";
         }
         modal.style.display = "flex";
+        modal.style.zIndex = "10010"; 
     }
 
     function cerrarCarrito() { document.getElementById('modalCarrito').style.display = "none"; }
@@ -815,3 +839,5 @@
         window.location.href = "https://wa.me/5358811896?text=" + mensaje;
     }
 </script>
+</body>
+</html>
