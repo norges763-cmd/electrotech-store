@@ -8,15 +8,15 @@ const productosData = [
         disponible: false
     },
     {
-        nombre: "Cargadores",
+        nombre: "Cajitas",
         precio: "Desde $750 CUP",
         categoria: "conectividad",
         fotos: ["https://i.ibb.co/KjY3KDTV/Lumii-20251209-160415678.jpg", "https://i.ibb.co/PsBRYb20/1000218217.jpg"],
-        descripcion: "Cargadores estándar y de doble puerto.",
+        descripcion: "Cajita de carga rápida y estándar.",
         disponible: true,
         variantes: [
-            {nombre: "Cargador Doble Puerto", precio: "$1800 CUP", img: "https://i.ibb.co/KjY3KDTV/Lumii-20251209-160415678.jpg", disponible: false},
-            {nombre: "Cargador 5V a 1A", precio: "$750 CUP", img: "https://i.ibb.co/PsBRYb20/1000218217.jpg", disponible: true}
+            {nombre: "Cajita de carga rápida C", precio: "$1650 CUP", img: "https://i.ibb.co/j9g0f4Yw/1000243774.jpg", disponible: true},
+            {nombre: "Cajita 5V a 1A", precio: "$750 CUP", img: "https://i.ibb.co/PsBRYb20/1000218217.jpg", disponible: true}
         ]
     },
     {
@@ -39,7 +39,7 @@ const productosData = [
         descripcion: "Cables de datos y carga (Tipo C, Tipo B, C a C).",
         disponible: true,
         variantes: [
-            {nombre: "Cable Tipo C a Tipo C", precio: "$580 CUP", img: "https://i.ibb.co/C3B0YzFm/Lumii-20251209-115131565.jpg", disponible: false},
+            {nombre: "Cable Tipo C a Tipo C", precio: "$700 CUP", img: "https://i.ibb.co/qYVj02L0/1000243775.jpg", disponible: true},
             {nombre: "Cable Tipo C a USB", precio: "$500 CUP", img: "https://i.ibb.co/23FmktSZ/1000217879.jpg", disponible: true},
             {nombre: "Cable Tipo B (Micro)", precio: "$700 CUP", img: "https://i.ibb.co/HpdRBhm1/1000218191.jpg", disponible: true}
         ]
