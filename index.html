@@ -396,7 +396,6 @@
             padding: 0 15px; 
         }
 
-        /* MODIFICADO: Z-index aumentado para estar sobre el menú de variantes */
         .carrito-flotante {
             position: fixed;
             bottom: 20px;
@@ -412,7 +411,7 @@
             font-size: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             cursor: pointer;
-            z-index: 10005; /* Aumentado para verse sobre el modal de variantes (que es 10002) */
+            z-index: 10005;
             transition: transform 0.2s;
         }
         
@@ -516,7 +515,6 @@
             gap: 10px;
         }
 
-        /* MODIFICADO: Z-index muy alto para que la animación vuele sobre todo */
         .fly-img {
             position: fixed;
             z-index: 20000;
@@ -672,7 +670,6 @@
         
         modal.classList.remove("modo-texto"); 
         modal.style.display = "flex";
-        // Z-Index muy alto para que la imagen a pantalla completa tape incluso el carrito
         modal.style.zIndex = "30000"; 
         
         carrusel.innerHTML = "";
@@ -717,7 +714,6 @@
             selectorModal = document.createElement("div");
             selectorModal.id = "modalSeleccion";
             selectorModal.className = "modal modo-texto";
-            // Z-Index ajustado a 10002. El carrito es 10005, así que el carrito se verá encima.
             selectorModal.style.zIndex = "10002"; 
             selectorModal.innerHTML = `<span class="btn-cerrar" style="color:#333; background:rgba(0,0,0,0.1);" onclick="cerrarSeleccion()">&times;</span>
                 <div class="selector-contenido"><h2 id="tituloSeleccion" class="selector-titulo">Seleccionar opción</h2><div class="tienda" id="listaOpciones"></div></div>`;
@@ -733,23 +729,32 @@
             const agotado = (op.disponible === false);
             if(agotado) { div.style.opacity = "0.6"; }
             
-            const fotoUrl = op.img; 
+            // MODIFICADO: Soporte para 'fotos' (array) o 'img' (string legacy)
+            const listaFotos = op.fotos ? op.fotos : [op.img];
+            const fotoUrl = listaFotos[0]; // Usamos la primera foto como portada
             
+            // Badge para mostrar cantidad de fotos si hay más de 1
+            const badgeHtml = listaFotos.length > 1 
+                ? `<span class="badge-fotos">${listaFotos.length} fotos</span>` 
+                : '';
+
             div.innerHTML = `
                 <div class="img-container">
                     <img src="${fotoUrl}" loading="lazy" class="img-variante-click">
+                    ${badgeHtml}
                 </div>
                 <h3>${op.nombre}</h3>
                 <span class="precio">${agotado ? 'Agotado' : op.precio}</span>
                 ${agotado 
                     ? '<button class="btn-agotado">Agotado</button>' 
-                    : `<button class="btn-whatsapp" onclick="agregarDesdeSelector(event, '${op.nombre}', '${op.precio}', '${op.img}')">Me interesa</button>`
+                    : `<button class="btn-whatsapp" onclick="agregarDesdeSelector(event, '${op.nombre}', '${op.precio}', '${fotoUrl}')">Me interesa</button>`
                 }`;
 
             const imgElement = div.querySelector('.img-variante-click');
             imgElement.onclick = (e) => {
                 e.stopPropagation(); 
-                abrirCarrusel([fotoUrl]);
+                // MODIFICADO: Ahora pasamos la lista completa al carrusel
+                abrirCarrusel(listaFotos);
             };
 
             lista.appendChild(div);
@@ -798,7 +803,6 @@
         setTimeout(() => btn.style.transform = "scale(1)", 200);
     }
 
-    // MODIFICADO: El carrito ahora tiene z-index 10010 para tapar el menú de variantes
     function abrirCarrito() {
         const modal = document.getElementById('modalCarrito');
         const lista = document.getElementById('listaCarrito');

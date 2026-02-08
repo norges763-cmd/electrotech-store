@@ -15,8 +15,18 @@ const productosData = [
         descripcion: "Cajita de carga rápida y estándar.",
         disponible: true,
         variantes: [
-            {nombre: "Cajita de carga rápida C", precio: "$1650 CUP", img: "https://i.ibb.co/j9g0f4Yw/1000243774.jpg", disponible: true},
-            {nombre: "Cajita 5V a 1A", precio: "$750 CUP", img: "https://i.ibb.co/PsBRYb20/1000218217.jpg", disponible: true}
+            {
+                nombre: "Cajita de carga rápida C", 
+                precio: "$1650 CUP", 
+                fotos: ["https://i.ibb.co/j9g0f4Yw/1000243774.jpg", "https://i.ibb.co/xtTZcmLv/1000243776.jpg"], // Puedes agregar más fotos aquí con comas
+                disponible: true
+            },
+            {
+                nombre: "Cajita 5V a 1A", 
+                precio: "$750 CUP", 
+                fotos: ["https://i.ibb.co/PsBRYb20/1000218217.jpg"], 
+                disponible: true
+            }
         ]
     },
     {
@@ -39,9 +49,24 @@ const productosData = [
         descripcion: "Cables de datos y carga (Tipo C, Tipo B, C a C).",
         disponible: true,
         variantes: [
-            {nombre: "Cable Tipo C a Tipo C", precio: "$700 CUP", img: "https://i.ibb.co/qYVj02L0/1000243775.jpg", disponible: true},
-            {nombre: "Cable Tipo C a USB", precio: "$500 CUP", img: "https://i.ibb.co/23FmktSZ/1000217879.jpg", disponible: true},
-            {nombre: "Cable Tipo B (Micro)", precio: "$700 CUP", img: "https://i.ibb.co/HpdRBhm1/1000218191.jpg", disponible: true}
+            {
+                nombre: "Cable Tipo C a Tipo C", 
+                precio: "$700 CUP", 
+                fotos: ["https://i.ibb.co/qYVj02L0/1000243775.jpg"], 
+                disponible: true
+            },
+            {
+                nombre: "Cable Tipo C a USB", 
+                precio: "$500 CUP", 
+                fotos: ["https://i.ibb.co/23FmktSZ/1000217879.jpg"], 
+                disponible: true
+            },
+            {
+                nombre: "Cable Tipo B (Micro)", 
+                precio: "$700 CUP", 
+                fotos: ["https://i.ibb.co/HpdRBhm1/1000218191.jpg"], 
+                disponible: true
+            }
         ]
     },
     {
@@ -52,8 +77,18 @@ const productosData = [
         descripcion: "Conecta USB a tu teléfono (Tipo C y Micro USB).",
         disponible: true,
         variantes: [
-            {nombre: "OTG Tipo C", precio: "$230 CUP", img: "https://i.ibb.co/Ng76BvzN/Lumii-20251004-131401596.jpg", disponible: true},
-            {nombre: "OTG Tipo B (Micro)", precio: "$300 CUP", img: "https://i.ibb.co/SD0SWwyx/OTG-Tipo-B.jpg", disponible: false}
+            {
+                nombre: "OTG Tipo C", 
+                precio: "$230 CUP", 
+                fotos: ["https://i.ibb.co/Ng76BvzN/Lumii-20251004-131401596.jpg"], 
+                disponible: true
+            },
+            {
+                nombre: "OTG Tipo B (Micro)", 
+                precio: "$300 CUP", 
+                fotos: ["https://i.ibb.co/SD0SWwyx/OTG-Tipo-B.jpg"], 
+                disponible: false
+            }
         ]
     },
     {
@@ -68,7 +103,6 @@ const productosData = [
         descripcion: "Una sola carga hasta el 100% le brinda una autonomía de 24 horas de reproducción contínua.",
         disponible: true
     },
-
     {
         nombre: "Memorias USB",
         precio: "Desde $2200 CUP",
@@ -77,8 +111,18 @@ const productosData = [
         descripcion: "Memorias de 32GB y 64GB.",
         disponible: true,
         variantes: [
-            {nombre: "Memoria USB 32GB", precio: "$2200 CUP", img: "https://i.ibb.co/6cnpqPTr/1000218192.jpg", disponible: true},
-            {nombre: "Memoria USB 64GB 3.0", precio: "---", img: "https://i.ibb.co/Ngj3BB8w/1000159173.jpg", disponible: false}
+            {
+                nombre: "Memoria USB 32GB", 
+                precio: "$2200 CUP", 
+                fotos: ["https://i.ibb.co/6cnpqPTr/1000218192.jpg"], 
+                disponible: true
+            },
+            {
+                nombre: "Memoria USB 64GB 3.0", 
+                precio: "---", 
+                fotos: ["https://i.ibb.co/Ngj3BB8w/1000159173.jpg"], 
+                disponible: false
+            }
         ]
     },
     {
@@ -106,6 +150,31 @@ const productosData = [
         disponible: true
     },
     {
+        nombre: "Lámaparas de cabeza",
+        precio: "---",
+        fotos: [
+            "https://i.ibb.co/5hqHN4FC/1000242937.jpg", 
+            "https://i.ibb.co/hx8RgSfx/1000242927.jpg", 
+            "https://i.ibb.co/hJ8C9x56/1000242926.jpg"
+        ],
+        categoria: "otros",
+        descripcion: "---",
+        disponible: true,
+        variantes: [
+            {
+                nombre: "Tira led", 
+                precio: "---", 
+                fotos: [
+                    "https://i.ibb.co/5hqHN4FC/1000242937.jpg", 
+                    "https://i.ibb.co/hx8RgSfx/1000242927.jpg", 
+                    "https://i.ibb.co/hJ8C9x56/1000242926.jpg"
+                ],
+                disponible: false 
+            }
+        ]
+    },
+
+    {
         nombre: "Medias",
         precio: "$350 CUP",
         categoria: "otros",
@@ -113,6 +182,8 @@ const productosData = [
         descripcion: "Diferentes tallas y modelos disponibles.",
         disponible: true
     },
+  
+       
     {
         nombre: "Mangas para el sol",
         precio: "$800 CUP el par",
@@ -130,4 +201,3 @@ const productosData = [
         disponible: true
     }
 ];
-
