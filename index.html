@@ -913,14 +913,17 @@ const productosData = [
         const carrusel = document.getElementById("carrusel");
         const instruccion = document.getElementById("txtInstruccion");
         modal.classList.add("modo-texto");
-        modal.style.zIndex = "9999"; 
+        modal.style.zIndex = "40000"; 
         
         let contenido = (!texto || texto.trim() === "") ? "Contactar para más información." : texto;
         carrusel.innerHTML = `<div class="modal-text"><h2>${nombre}</h2><p>${contenido}</p></div>`;
         instruccion.style.display = "none"; modal.style.display = "flex";
     }
 
-    function cerrarModal() { document.getElementById("miModal").style.display = "none"; }
+    function cerrarModal() {
+      const modal= document.getElementById("miModal");
+   modal.style.display = "none"; 
+modal.style.zIndex = "9999";}
 
     function filtrar(categoria, boton) {
         const botones = document.querySelectorAll('.btn-filtro');
@@ -957,6 +960,10 @@ const productosData = [
             // MODIFICADO: Soporte para 'fotos' (array) o 'img' (string legacy)
             const listaFotos = op.fotos ? op.fotos : [op.img];
             const fotoUrl = listaFotos[0]; // Usamos la primera foto como portada
+const descSegura = op.descripcion ? op.descripcion.replace(/'/g, "\\'") : "";
+        const botonDesc = op.descripcion 
+            ? `<button class="btn-descripcion" onclick="verDescripcion('${op.nombre}', '${descSegura}')">Descripción</button>` 
+            : "";
             
             // Badge para mostrar cantidad de fotos si hay más de 1
             const badgeHtml = listaFotos.length > 1 
@@ -970,6 +977,7 @@ const productosData = [
                 </div>
                 <h3>${op.nombre}</h3>
                 <span class="precio">${agotado ? 'Agotado' : op.precio}</span>
+                ${botonDesc}
                 ${agotado 
                     ? '<button class="btn-agotado">Agotado</button>' 
                     : `<button class="btn-whatsapp" onclick="agregarDesdeSelector(event, '${op.nombre}', '${op.precio}', '${fotoUrl}')">Me interesa</button>`
